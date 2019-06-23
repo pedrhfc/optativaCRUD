@@ -1,28 +1,288 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/home_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeActivity"
+    android:theme="@style/AppTheme">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewCadastrar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="7dp"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewCadastrar"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewCadastrar"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewCadastrar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewEditar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="7dp"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewEditar"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewEditar"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewEditar"
+        app:layout_constraintVertical_bias="0.507" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewListar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="7dp"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewListar"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewListar"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewListar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewRemover"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="7dp"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toTopOf="@+id/cardviewRemover"
+        app:layout_constraintEnd_toEndOf="@+id/cardviewRemover"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewRemover" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/nav_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/toolbar_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardviewCadastrar"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#f5f5f5"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nav_toolbar"
+        app:layout_constraintVertical_bias="0.17000002">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-4dp"
+            android:paddingTop="15dp"
+            android:text="Cadastrar"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:paddingTop="55dp"
+            android:text="adicionar novo aluno"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="25dp"
+            android:layout_height="3dp"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-57dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorPrimary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardviewEditar"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#f5f5f5"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewCadastrar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-31dp"
+            android:paddingTop="15dp"
+            android:text="Editar"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-30dp"
+            android:paddingTop="55dp"
+            android:text="editar aluno"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="25dp"
+            android:layout_height="3dp"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-57dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorPrimary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardviewListar"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#f5f5f5"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewEditar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-33dp"
+            android:paddingTop="15dp"
+            android:text="Listar"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-24dp"
+            android:paddingTop="55dp"
+            android:text="listar aluno(s)"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="25dp"
+            android:layout_height="3dp"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-57dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorPrimary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardviewRemover"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#f5f5f5"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewListar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-11dp"
+            android:paddingTop="15dp"
+            android:text="Remover"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-22dp"
+            android:paddingTop="55dp"
+            android:text="remover aluno"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="25dp"
+            android:layout_height="3dp"
+            android:layout_gravity="fill_vertical|center_horizontal"
+            android:layout_marginLeft="-57dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorPrimary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

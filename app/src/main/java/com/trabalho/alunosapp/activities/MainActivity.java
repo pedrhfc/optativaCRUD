@@ -1,10 +1,9 @@
 package com.trabalho.alunosapp.activities;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MaterialButton buttonEnviar = findViewById(R.id.buttonEntrar);
+        final CheckBox checkBox = findViewById(R.id.checkBox);
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,11 +27,14 @@ public class MainActivity extends AppCompatActivity {
                 TextInputEditText textInputSenha = findViewById(R.id.password);
                 String nome = textInputUsuario.getText().toString();
                 String senha = textInputSenha.getText().toString();
+                checkBox.setChecked(false);
                 if(nome.isEmpty() || senha.isEmpty()){
-                    alert("Insira um usuário ou uma senha válida.");
+                    alert("Campo vazio. Preencha todos os campos.");
                 }else if(nome.equals("1") && senha.equals("1")) {
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
+                    textInputUsuario.setText("");
+                    textInputSenha.setText("");
                 }else{
                     alert("Usuário ou senha inválido(s).");
                 }

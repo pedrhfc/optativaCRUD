@@ -1,62 +1,101 @@
 package com.trabalho.alunosapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.util.Log;
-import android.view.Window;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.tabs.TabLayout;
 
-public class HomeActivity extends AppCompatActivity {
 
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+    Intent intent;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("alunapp");
         setContentView(R.layout.activity_home);
-        final TabLayout tabs = findViewById(R.id.tabs);
-        final AppBarLayout appBar = findViewById(R.id.appbar);
-        tabs.addTab(tabs.newTab().setText("Cad."));
-        tabs.addTab(tabs.newTab().setText("List."));
-        tabs.addTab(tabs.newTab().setText("Atual."));
-        tabs.addTab(tabs.newTab().setText("Rem."));
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch(tabs.getSelectedTabPosition()){
-                    case 0:
-                        Log.i("teste",tabs.getTabAt(0).getText().toString());
-                        break;
-                    case 1:
-                        Log.i("teste",tabs.getTabAt(1).getText().toString());
-                        break;
-                    case 2:
-                        Log.i("teste",tabs.getTabAt(2).getText().toString());
-                        break;
-                    case 3:
-                        Log.i("teste",tabs.getTabAt(3).getText().toString());
-                        break;
-                    default:
 
-                        break;
-                }
-            }
+        Toolbar toolbar = findViewById(R.id.nav_toolbar);
+        TextView textView = findViewById(R.id.toolbar_title);
+        setSupportActionBar(toolbar);
+        textView.setText(toolbar.getTitle());
+        textView.setTextColor(0xFFFFFFFF);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        CardView cardViewCadastrar = findViewById(R.id.cardviewCadastrar);
+        CardView cardViewEditar = findViewById(R.id.cardviewEditar);
+        CardView cardViewListar = findViewById(R.id.cardviewListar);
+        CardView cardViewRemover = findViewById(R.id.cardviewRemover);
+        cardViewCadastrar.setOnClickListener(this);
+        cardViewEditar.setOnClickListener(this);
+        cardViewListar.setOnClickListener(this);
+        cardViewRemover.setOnClickListener(this);
     }
+    public void onClick(View v){
+
+        switch(v.getId()) {
+
+            case R.id.cardviewCadastrar:
+                intent = new Intent(getApplicationContext(), CadastrarActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.cardviewEditar:
+                intent = new Intent(getApplicationContext(), EditarActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.cardviewListar:
+                intent = new Intent(getApplicationContext(), ListarActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.cardviewRemover:
+                intent = new Intent(getApplicationContext(), RemoverActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
     @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        int id = menuItem.getItemId();
+
+        if(id == R.id.action_logout){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.app_name);
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setMessage("Você tem a certeza que deseja sair?")
+                    .setCancelable(false)
+                    .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
 }

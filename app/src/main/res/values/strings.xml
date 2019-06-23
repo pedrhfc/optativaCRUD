@@ -2,6 +2,8 @@
     <string name="app_name">alunosApp</string>
     <string name="textInputUsuario">Usuário</string>
     <string name="textInputSenha">Senha</string>
+    <string name="textInputNome">Nome</string>
+    <string name="textInputEmail">Email</string>
     <string name="checkBoxManterConectado">Manter-me conectado</string>
     <string name="buttonLogin">LOGIN</string>
 </resources>
