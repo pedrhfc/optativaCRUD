@@ -9,12 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "register";
-    private static final String TABLE_NAME_USR = "user_login";
-    private static final String COL_ID_USR = "id";
-    private static final String COL_NOME_USR = "nome";
-    private static final String COL_EMAIL_USR = "email";
+    private static final String TABLE_NAME = "user_login";
+    private static final String COL_ID = "id";
+    private static final String COL_NOME = "nome";
+    private static final String COL_EMAIL = "email";
 
-    private static final String CREATE_TABLE_USR = "CREATE TABLE " + TABLE_NAME_USR +
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
             "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, email TEXT)";
 
     public DatabaseHelper(Context context) {
@@ -23,39 +23,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_USR);
+        db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
     public boolean addUser(String nome, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_NOME_USR, nome);
-        contentValues.put(COL_EMAIL_USR, email);
+        contentValues.put(COL_NOME, nome);
+        contentValues.put(COL_EMAIL, email);
 
-        long result = db.insert(TABLE_NAME_USR, null, contentValues);
+        long result = db.insert(TABLE_NAME, null, contentValues);
 
         return result != -1;
+    }
+
+    public Integer deleteUser(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME,"ID = ?", new String[] {id});
+
     }
 
     public boolean updateUser(String id, String nome, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_ID_USR, id);
-        contentValues.put(COL_NOME_USR, nome);
-        contentValues.put(COL_EMAIL_USR, email);
-        db.update(TABLE_NAME_USR, contentValues, COL_ID_USR + "= ?", new String[]{id});
+        contentValues.put(COL_ID, id);
+        contentValues.put(COL_NOME, nome);
+        contentValues.put(COL_EMAIL, email);
+        db.update(TABLE_NAME, contentValues, COL_ID + "= ?", new String[]{id});
         return true;
     }
 
     public Cursor selectUserById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME_USR + " WHERE id= " + id, null);
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id= " + id, null);
     }
 }
 

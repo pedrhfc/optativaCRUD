@@ -4,6 +4,9 @@
     <string name="textInputSenha">Senha</string>
     <string name="textInputNome">Nome</string>
     <string name="textInputEmail">Email</string>
+    <string name="textInputId">Id</string>
     <string name="checkBoxManterConectado">Manter-me conectado</string>
     <string name="buttonLogin">LOGIN</string>
+    <string name="buttonCadastrar">CADASTRAR</string>
+    <string name="buttonRemover">REMOVER</string>
 </resources>
