@@ -49,8 +49,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 }else{
                     if (inserirAluno) {
                         alert("Aluno cadastrado com sucesso!");
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                     else
                         alert("Não foi possível cadastrar o aluno "+ nome +".");

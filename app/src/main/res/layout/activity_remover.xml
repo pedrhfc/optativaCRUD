@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CadastrarActivity"
-    android:theme="@style/AppTheme">
+    tools:context=".RemoverActivity"
+    android:theme="@style/AppTheme"
+    android:background="@color/lightgreyBackground">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/nav_toolbar"
@@ -37,10 +38,14 @@
         android:layout_marginRight="8dp"
         android:hint="@string/textInputId"
         app:boxBackgroundColor="#f5f5f5"
-        app:endIconMode="clear_text">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/id"
+            android:maxLength="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number" />

@@ -9,4 +9,5 @@
     <string name="buttonLogin">LOGIN</string>
     <string name="buttonCadastrar">CADASTRAR</string>
     <string name="buttonRemover">REMOVER</string>
+    <string name="buttonEditar">EDITAR</string>
 </resources>
