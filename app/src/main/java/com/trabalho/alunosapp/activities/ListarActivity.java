@@ -5,8 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,7 +42,6 @@ public class ListarActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         setSupportActionBar(toolbar);
         alunoList = findViewById(R.id.list);
-        int[] drawableId = {R.drawable.circle};
         textView.setText(toolbar.getTitle());
         textView.setTextColor(0xFFFFFFFF);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
