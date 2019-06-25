@@ -40,7 +40,7 @@ public class RemoverActivity extends AppCompatActivity {
         public void onClick(View v) {
             int id = editTextId.getText().toString().length();
             if(id > 0){
-                Integer deleteRow = db.deleteUser(editTextId.getText().toString());
+                Integer deleteRow = db.delete(editTextId.getText().toString());
                 if(deleteRow > 0) {
                     alert("Aluno removido com sucesso!");
                     finish();

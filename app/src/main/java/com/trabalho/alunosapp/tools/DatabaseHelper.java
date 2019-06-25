@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addUser(String nome, String email) {
+    public boolean insert(String nome, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_NOME, nome);
@@ -43,13 +43,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public Integer deleteUser(String id){
+    public Integer delete(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME,"ID = ?", new String[] {id});
 
     }
 
-    public boolean updateUser(String id, String nome, String email) {
+    public boolean update(String id, String nome, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_ID, id);
@@ -59,9 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor selectUserById(int id) {
+    public Cursor findAll() {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id= " + id, null);
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 }
 

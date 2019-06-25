@@ -3,7 +3,6 @@ package com.trabalho.alunosapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -43,7 +42,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 nome = editTextNome.getText().toString();
                 email = editTextEmail.getText().toString();
 
-                boolean inserirAluno = db.addUser(nome,email);
+                boolean inserirAluno = db.insert(nome,email);
                 if(nome.isEmpty() || email.isEmpty()){
                     alert("Campo vazio. Preencha todos os campos.");
                 }else{

@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.trabalho.alunosapp.activities">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +15,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".RemoverActivity"></activity>
-        <activity android:name=".ListarActivity" />
+        <activity android:name=".ListarActivity"
+                    android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".EditarActivity" />
         <activity android:name=".CadastrarActivity" />
         <activity android:name=".HomeActivity" />

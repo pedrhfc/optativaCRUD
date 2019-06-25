@@ -2,16 +2,27 @@ package com.trabalho.alunosapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.ListViewCompat;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.trabalho.alunosapp.tools.DatabaseHelper;
+import com.trabalho.alunosapp.tools.HttpURLConnectionWS;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 
 public class ListarActivity extends AppCompatActivity {
     DatabaseHelper db;
@@ -19,8 +30,8 @@ public class ListarActivity extends AppCompatActivity {
     TabLayout tabLayout;
     TextView textView;
 
-    String[] listArray = {"Android ListView Example","ListVIew Android","Simple Android ListView","ListView in Android","Android ListView Example","ListVIew Android","Simple Android ListView","ListView in Android","Android ListView Example","ListVIew Android","Simple Android ListView","ListView in Android"};
-    ListView mlistView;
+    ArrayList<String> listArray;
+    ListView alunoList;
     ArrayAdapter adapter;
 
     @Override
@@ -32,12 +43,12 @@ public class ListarActivity extends AppCompatActivity {
         textView = findViewById(R.id.toolbar_title);
         db = new DatabaseHelper(this);
         setSupportActionBar(toolbar);
+        alunoList = findViewById(R.id.list);
+        int[] drawableId = {R.drawable.circle};
         textView.setText(toolbar.getTitle());
         textView.setTextColor(0xFFFFFFFF);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         tabInstance();
-
-
     }
 
         public void tabInstance() {
@@ -50,13 +61,12 @@ public class ListarActivity extends AppCompatActivity {
                 public void onTabSelected(TabLayout.Tab tab) {
                     switch (tab.getPosition()) {
                         case 0:
-                            adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.listview_row, listArray);
-                            mlistView = findViewById(R.id.list);
-                            mlistView.setAdapter(adapter);
-                            Log.i("teste", "SQLITE");
+                            listArray = new ArrayList<>();
+                            selectAll();
                             break;
                         case 1:
-                            Log.i("teste", "JSON");
+                            listArray = new ArrayList<>();
+                            getAluno();
                             break;
                     }
                 }
@@ -65,10 +75,8 @@ public class ListarActivity extends AppCompatActivity {
                 public void onTabUnselected(TabLayout.Tab tab) {
                     switch (tab.getPosition()) {
                         case 0:
-                            Log.i("teste", "SQLITE");
                             break;
                         case 1:
-                            Log.i("teste", "JSON");
                             break;
                     }
                 }
@@ -77,5 +85,55 @@ public class ListarActivity extends AppCompatActivity {
                 public void onTabReselected(TabLayout.Tab tab) {
                 }
             });
+            tabLayout.selectTab(tabLayout.getTabAt(1));
         }
+    public void selectAll() {
+        Cursor data = db.findAll();
+        if (data.getCount() == 0) {
+            alert("Nenhum usuário encontrado.");
+            finish();
+        } else {
+            while (data.moveToNext()) {
+                StringBuilder buffer = new StringBuilder();
+                String id = "\n" + data.getString(0);
+                String nome = "\n" + data.getString(1);
+                String email = "\n" + data.getString(2);
+                buffer.append(id).append(nome).append(email);
+                listArray.add(buffer.toString());
+            }
+            adapter = new ArrayAdapter<>(this, R.layout.listview_row, listArray);
+            alunoList.setAdapter(adapter);
+        }
+    }
+
+    public void getAluno(){
+        try {
+            String json = new HttpURLConnectionWS().execute().get();
+            JSONObject jObject = new JSONObject(json);
+            JSONObject jAlunos = jObject.getJSONObject("alunos");
+            JSONArray jArrayAluno = jAlunos.getJSONArray("aluno");
+            for(int i = 0 ; i < jArrayAluno.length() ; i++) {
+                StringBuilder buffer = new StringBuilder();
+                String nome = "\n" + jArrayAluno.getJSONObject(i).getString("alunos_nome");
+                String email = "\n" + jArrayAluno.getJSONObject(i).getString("alunos_email");
+                buffer.append(nome).append(email);
+                listArray.add(buffer.toString());
+            }
+            adapter = new ArrayAdapter<>(this, R.layout.listview_row, listArray);
+            alunoList.setAdapter(adapter);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        } catch (ExecutionException ex) {
+            ex.printStackTrace();
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+    }
+
+
+    }
+    public void alert(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 }
